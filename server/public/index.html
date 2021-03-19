@@ -13,11 +13,16 @@
     <h1>Weekend To Do List</h1>
     <div>
         <h2>Add A Task</h2>
-        <input type="text" id="taskIn" placeholder="Another Thing I have To Do">
+        <input type="text" id="taskIn" placeholder="Another Thing To Do">
+        <select id="completedIn">
+            <option>Incomplete</option>
+            <option>Completed</option>
+        </select>
         <button id="addTaskButton">Add Task</button>
     </div>
-    <div>
+    <div id="outputDiv">
         <h2>Things I Have to get done:</h2>
+        <ul id="taskOut"></ul>
     </div>
 </body>
 </html>
