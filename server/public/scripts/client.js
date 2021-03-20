@@ -4,6 +4,7 @@ function onReady(){
     console.log( 'in JQ' );
     // put click handlers here
     $( '#addTaskButton' ).on( 'click', addTask );
+    $( '#taskOut').on('click', '.completedTaskButton', completeTask );
 
 }// end onready
 
@@ -52,12 +53,28 @@ function getTask(){
             if( response[i].completed ){
                 completedHTML = "COMPLETED";
             }
-            el.append( `<li>${response[i].task} 
-            <button data-id="${response[i].id}" class="deleteTaskButton">Delete</button>
-            ${ completedHTML }</li>`);
+            el.append( `<tr><td>${response[i].task}</td><td>
+            <button data-id="${response[i].id}" class="deleteTaskButton">Delete</button></td>
+            <td>${ completedHTML }</td></tr>`);
         }   
     })
 }
+
+function completeTask(){
+    const myId = $(this).data( 'id' );
+    console.log( 'in completeTask:', myId );
+    // ajax call for the PUT to db
+    $.ajax({
+        method: 'PUT',
+        url: '/todo/' + myId
+    }).then( function ( response){
+        console.log( 'back from PUT:', response );
+        getTask();
+    }).catch( function ( err ){
+        console.log( err );
+        alert( 'PUT not working' );
+    })// end ajax PUT
+} // end completedTask
 
 // create an clear for the input
 function emptyInput(){
