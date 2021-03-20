@@ -27,6 +27,7 @@ function addTask(){
     }).then( function( response ){
         console.log( 'back from post with:', response );
         getTask();
+        emptyInput();
     }).catch( function( err ){
         alert( 'error adding item to db' );
         console.log( err );
@@ -51,9 +52,15 @@ function getTask(){
             if( response[i].completed ){
                 completedHTML = "COMPLETED";
             }
-            el.append( `<li>${response[i].task}: ${response[i].completed}, 
+            el.append( `<li>${response[i].task} 
             <button data-id="${response[i].id}" class="deleteTaskButton">Delete</button>
             ${ completedHTML }</li>`);
         }   
     })
+}
+
+// create an clear for the input
+function emptyInput(){
+    console.log( 'in emptyInput' );
+    $( '#taskIn' ).val('');
 }
