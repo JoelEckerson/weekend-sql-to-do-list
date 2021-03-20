@@ -13,7 +13,7 @@ function addTask(){
     console.log( 'in addTask' );
     // get input and package into an object
     let isComplete = false;
-    if ($( '#completedIn').val() === 'complete' ){
+    if ($( '#completedIn').val() === 'Completed' ){
         isComplete = true;
     }
     let objectToSend = {
@@ -77,7 +77,20 @@ function completeTask(){
 } // end completedTask
 
 function deleteTask(){
-    console.log( 'in deleteTask' );
+    const myId = $(this).data( 'id' );
+    console.log( 'in deleteTask:', myId );
+    // ajax call for the PUT to db
+    $.ajax({
+        method: 'DELETE',
+        url: '/todo/' + myId
+    }).then( function ( response){
+        console.log( 'back from DELETE:', response );
+        getTask();
+    }).catch( function ( err ){
+        console.log( err );
+        alert( 'DELETE not working' );
+    })// end ajax PUT
+
 }// end deleteTask
 
 // create an clear for the input
