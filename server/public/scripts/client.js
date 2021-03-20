@@ -5,7 +5,7 @@ function onReady(){
     // put click handlers here
     $( '#addTaskButton' ).on( 'click', addTask );
     $( '#taskOut').on('click', '.completedTaskButton', completeTask );
-
+    $( '#taskOut').on('click', '.deleteTaskButton', deleteTask );
 }// end onready
 
 // create function to send data to server
@@ -76,8 +76,12 @@ function completeTask(){
     })// end ajax PUT
 } // end completedTask
 
+function deleteTask(){
+    console.log( 'in deleteTask' );
+}// end deleteTask
+
 // create an clear for the input
 function emptyInput(){
     console.log( 'in emptyInput' );
     $( '#taskIn' ).val('');
-}
+}// end emptyInputs
