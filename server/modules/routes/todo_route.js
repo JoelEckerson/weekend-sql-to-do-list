@@ -5,6 +5,16 @@ const pool = require( '../pool' );
 // routes with logic
 
 // GET
+router.get( '/', ( req, res )=>{
+    console.log( 'todo_route GET');
+    let queryString = `SELECT * FROM "todo"`;
+    pool.query( queryString ).then( ( results )=>{
+        res.send( results.rows );
+    }).catch( ( err )=>{
+        console.log( err );
+        res.sendStatus( 500 );
+    })// end pool query
+})// end GET
 
 // POST
 router.post( '/', ( req, res )=>{
@@ -20,8 +30,8 @@ router.post( '/', ( req, res )=>{
         // if not successful send 500
         console.log( err );
         res.sendStatus( 500 );
-    })
-})
+    })// end pool query
+})// end POST
 
 // UPDATE
 
