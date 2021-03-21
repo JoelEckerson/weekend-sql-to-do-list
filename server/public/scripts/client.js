@@ -6,6 +6,7 @@ function onReady(){
     $( '#addTaskButton' ).on( 'click', addTask );
     $( '#taskOut').on('click', '.completedTaskButton', completeTask );
     $( '#taskOut').on('click', '.deleteTaskButton', deleteTask );
+    getTask();
 }// end onready
 
 // create function to send data to server
@@ -49,16 +50,18 @@ function getTask(){
         el.empty();
         for (let i = 0; i < response.length; i++) {
             let completedHTML= `<button data-id="${response[i].id}" class="completedTaskButton">Completed</button>`;
+            let colorChange = "white";
             // change the display to just text if completed
             if( response[i].completed ){
                 completedHTML = "COMPLETED";
+                colorChange = "red";
             }
-            el.append( `<tr><td>${response[i].task}</td><td>
+            el.append( `<tr class="appendRow" style="background-color:${colorChange}"><td>${response[i].task}</td><td>
             <button data-id="${response[i].id}" class="deleteTaskButton">Delete</button></td>
             <td>${ completedHTML }</td></tr>`);
         }   
     })
-}
+}// end getTask
 
 function completeTask(){
     const myId = $(this).data( 'id' );
