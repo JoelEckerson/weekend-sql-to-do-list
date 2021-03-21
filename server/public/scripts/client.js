@@ -56,7 +56,7 @@ function getTask(){
                 completedHTML = "COMPLETED";
                 colorChange = "red";
             }
-            el.append( `<tr class="appendRow" style="background-color:${colorChange}"><td>${response[i].task}</td><td>
+            el.append( `<tr style="background-color:${colorChange}"><td>${response[i].task}</td><td>
             <button data-id="${response[i].id}" class="deleteTaskButton">Delete</button></td>
             <td>${ completedHTML }</td></tr>`);
         }   
